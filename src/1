@@ -1,0 +1,421 @@
+/*  --本月第一天
+ select trunc(add_months(last_day(sysdate), -1)) + 1 into now_1 from dual;
+
+ --本月最后一天
+*/
+
+select sales_user, pMax55,pMin55,qty55,pMax65,pMin65,qty65,pMax70,pMin70,qty70,pMax75,pMin75,qty75,pMax80,pMin80,qty80,pMax86,pMin86,qty86,pMax98,pMin98,qty98,
+pMaxSD02,
+  from (select t2.sales_user,
+               sum(decode(t1.productModel, '55', t1.max_qty+t1.SCATTERED_NUM, 0)) as pMax55,
+               sum(decode(t1.productModel, '55', t1.min_qty+t1.SCATTERED_NUM, 0)) as pMin55,
+
+
+               sum(decode(t1.productModel, '65', t1.max_qty+t1.SCATTERED_NUM, 0)) as pMax65,
+
+                sum(decode(t1.productModel, '65', t1.min_qty+t1.SCATTERED_NUM, 0)) as pMin65,
+
+
+
+
+               sum(decode(t1.productModel, '70', t1.max_qty+t1.SCATTERED_NUM, 0)) as pMax70,
+
+               sum(decode(t1.productModel, '70', t1.min_qty+t1.SCATTERED_NUM, 0)) as pMin70,
+
+
+
+               sum(decode(t1.productModel, '75', t1.max_qty+t1.SCATTERED_NUM, 0)) as pMax75,
+               sum(decode(t1.productModel, '75', t1.min_qty+t1.SCATTERED_NUM, 0)) as pMin75,
+
+
+
+               sum(decode(t1.productModel, '80', t1.max_qty+t1.SCATTERED_NUM, 0)) as pMax80,
+
+               sum(decode(t1.productModel, '80', t1.min_qty+t1.SCATTERED_NUM, 0)) as pMin80,
+
+
+
+
+               sum(decode(t1.productModel, '86', t1.max_qty+t1.SCATTERED_NUM, 0)) as pMax86,
+                  sum(decode(t1.productModel, '86', t1.min_qty++t1.SCATTERED_NUM, 0)) as pMin86,
+
+
+
+               sum(decode(t1.productModel, '98', t1.max_qty+t1.SCATTERED_NUM, 0)) as pMax98,
+               sum(decode(t1.productModel, '98', t1.min_qty+t1.SCATTERED_NUM, 0)) as pMin98,
+
+               sum(decode(t1.productModel, 'SD02', t1.max_qty+t1.SCATTERED_NUM, 0)) as pMaxSD02,
+                  sum(decode(t1.productModel, 'SD02', t1.min_qty+t1.SCATTERED_NUM, 0)) as pMinSD02,
+
+               sum(decode(t1.productModel, 'SS03', t1.max_qty+t1.SCATTERED_NUM, 0)) as pMaxSS03,
+                sum(decode(t1.productModel, 'SS03', t1.min_qty+t1.SCATTERED_NUM, 0)) as pMaxSS03,
+
+               sum(decode(t1.productModel, 'SS03A', t1.max_qty+t1.SCATTERED_NUM, 0)) as pMaxSS03A,
+                sum(decode(t1.productModel, 'SS03A', t1.min_qty+t1.SCATTERED_NUM, 0)) as pMinSS03A,
+
+               sum(decode(t1.productModel, 'SS05', t1.max_qty+t1.SCATTERED_NUM, 0)) as pMaxSS05,
+                sum(decode(t1.productModel, 'SS05', t1.min_qty+t1.SCATTERED_NUM, 0)) as pMinSS05,
+
+               sum(decode(t1.productModel, 'SC03', t1.max_qty+t1.SCATTERED_NUM, 0)) as pMaxSC03,
+                sum(decode(t1.productModel, 'SC03', t1.min_qty+t1.SCATTERED_NUM, 0)) as pMinSC03,
+
+
+               sum(decode(t1.productModel, 'SD11', t1.max_qty+t1.SCATTERED_NUM, 0)) as pMaxSD11,
+                sum(decode(t1.productModel, 'SD11', t1.min_qty+t1.SCATTERED_NUM, 0)) as pMinSD11,
+
+
+               sum(decode(t1.productModel, 'SD13', t1.max_qty+t1.SCATTERED_NUM, 0)) as pMaxSD13,
+               sum(decode(t1.productModel, 'SD13', t1.min_qty+t1.SCATTERED_NUM, 0)) as pMinSD13,
+
+
+               sum(decode(t1.productModel, 'SM01', t1.max_qty+t1.SCATTERED_NUM, 0)) as pMaxSM01,
+               sum(decode(t1.productModel, 'SM01', t1.min_qty+t1.SCATTERED_NUM, 0)) as pMaxSM01pMaxSM01,
+
+               sum(decode(t1.productModel, 'SL01', t1.max_qty+t1.SCATTERED_NUM, 0)) as pMaxSL01,
+               sum(decode(t1.productModel, 'SL01', t1.min_qty+t1.SCATTERED_NUM, 0)) as pMinSL01,
+
+
+               sum(decode(t1.productModel, 'SP05', t1.max_qty+t1.SCATTERED_NUM, 0)) as pMaxSP05,
+                    sum(decode(t1.productModel, 'SP05', t1.min_qty+t1.SCATTERED_NUM, 0)) as pMinSP05,
+
+
+               sum(decode(t1.productModel, 'SC03', t1.max_qty+t1.SCATTERED_NUM, 0)) as pMaxSC03,
+                  sum(decode(t1.productModel, 'SC03', t1.min_qty+t1.SCATTERED_NUM, 0)) as pMinSC03,
+
+
+               sum(decode(t1.productModel, 'SC05', t1.max_qty+t1.SCATTERED_NUM, 0)) as pMaxSC05,
+                sum(decode(t1.productModel, 'SC05', t1.min_qty+t1.SCATTERED_NUM, 0)) as pMinSC05,
+
+
+               sum(decode(t1.productModel, 'ST01', t1.max_qty+t1.SCATTERED_NUM, 0)) as pMaxST01,
+               sum(decode(t1.productModel, 'ST01', t1.min_qty+t1.SCATTERED_NUM, 0)) as pMinST01,
+
+
+               sum(decode(t1.productModel, 'SM02', t1.max_qty+t1.SCATTERED_NUM, 0)) as pMaxSM02,
+                sum(decode(t1.productModel, 'SM02', t1.min_qty+t1.SCATTERED_NUM, 0)) as pMinSM02,
+
+
+               sum(decode(t1.productModel, 'SW20', t1.max_qty+t1.SCATTERED_NUM, 0)) as pMaxSW20,
+                sum(decode(t1.productModel, 'SW20', t1.min_qty+t1.SCATTERED_NUM, 0)) as pMinSW20,
+
+
+               sum(decode(t1.productModel, 'SW21', t1.max_qty+t1.SCATTERED_NUM, 0)) as pMaxSW21,
+               sum(decode(t1.productModel, 'SW21', t1.min_qty+t1.SCATTERED_NUM, 0)) as pMinSW21,
+
+
+               sum(decode(t1.productModel, 'SC13', t1.max_qty+t1.SCATTERED_NUM, 0)) as pMaxSC13,
+                  sum(decode(t1.productModel, 'SC13', t1.min_qty+t1.SCATTERED_NUM, 0)) as pMinSC13,
+
+
+               sum(decode(t1.productModel, 'MT15', t1.max_qty+t1.SCATTERED_NUM, 0)) as pMaxMT15,
+               sum(decode(t1.productModel, 'MT15', t1.min_qty+t1.SCATTERED_NUM, 0)) as pMinMT15,
+
+
+               sum(decode(t1.productModel, 'MT21', t1.max_qty+t1.SCATTERED_NUM, 0)) as pMaxMT21,
+               sum(decode(t1.productModel, 'MT21', t1.min_qty+t1.SCATTERED_NUM, 0)) as pMinMT21,
+
+
+               nvl((select sum(t.act_shp_qty)
+                     from oms_do_lines t
+                    where t.trx_date >=
+                          (select trunc(add_months(last_day(sysdate), -1)) + 1
+                             from dual)
+                      and t.trx_date <=
+                          (select last_day(add_months(sysdate, 0)) from dual)
+                      and t.sales_user = sales_user
+                      and t.cus_model in
+                          (select SALE_MODEL
+                             from data_item_v@cidpcrm_to_cidpmd
+                            where large_class = '001'
+                              and ITEM_SIZE = '55')),
+                   0) qty55,
+               nvl((select sum(t.act_shp_qty)
+                     from oms_do_lines t
+                    where t.trx_date >=
+                          (select trunc(add_months(last_day(sysdate), -1)) + 1
+                             from dual)
+                      and t.trx_date <=
+                          (select last_day(add_months(sysdate, 0)) from dual)
+                      and t.sales_user = sales_user
+                      and t.cus_model in
+                          (select SALE_MODEL
+                             from data_item_v@cidpcrm_to_cidpmd
+                            where large_class = '001'
+                              and ITEM_SIZE = '65')),
+                   0) qty65,
+               nvl((select sum(t.act_shp_qty)
+                     from oms_do_lines t
+                    where t.trx_date >=
+                          (select trunc(add_months(last_day(sysdate), -1)) + 1
+                             from dual)
+                      and t.trx_date <=
+                          (select last_day(add_months(sysdate, 0)) from dual)
+                      and t.sales_user = sales_user
+                      and t.cus_model in
+                          (select SALE_MODEL
+                             from data_item_v@cidpcrm_to_cidpmd
+                            where large_class = '001'
+                              and ITEM_SIZE = '70')),
+                   0) qty70,
+               nvl((select sum(t.act_shp_qty)
+                     from oms_do_lines t
+                    where t.trx_date >=
+                          (select trunc(add_months(last_day(sysdate), -1)) + 1
+                             from dual)
+                      and t.trx_date <=
+                          (select last_day(add_months(sysdate, 0)) from dual)
+
+                      and t.sales_user = sales_user
+                      and t.cus_model in
+                          (select SALE_MODEL
+                             from data_item_v@cidpcrm_to_cidpmd
+                            where large_class = '001'
+                              and ITEM_SIZE = '75')),
+                   0) qty75,
+               nvl((select sum(t.act_shp_qty)
+                     from oms_do_lines t
+                    where t.trx_date >=
+                          (select trunc(add_months(last_day(sysdate), -1)) + 1
+                             from dual)
+                      and t.trx_date <=
+                          (select last_day(add_months(sysdate, 0)) from dual)
+                      and t.sales_user = sales_user
+                      and t.cus_model in
+                          (select SALE_MODEL
+                             from data_item_v@cidpcrm_to_cidpmd
+                            where large_class = '001'
+                              and ITEM_SIZE = '80')),
+                   0) qty80,
+
+               nvl((select sum(t.act_shp_qty)
+                     from oms_do_lines t
+                    where t.trx_date >=
+                          (select trunc(add_months(last_day(sysdate), -1)) + 1
+                             from dual)
+                      and t.trx_date <=
+                          (select last_day(add_months(sysdate, 0)) from dual)
+                      and t.sales_user = sales_user
+                      and t.cus_model in
+                          (select SALE_MODEL
+                             from data_item_v@cidpcrm_to_cidpmd
+                            where large_class = '001'
+                              and ITEM_SIZE = '86')),
+                   0) qty86,
+               nvl((select sum(t.act_shp_qty)
+                     from oms_do_lines t
+                    where t.trx_date >=
+                          (select trunc(add_months(last_day(sysdate), -1)) + 1
+                             from dual)
+                      and t.trx_date <=
+                          (select last_day(add_months(sysdate, 0)) from dual)
+                      and t.sales_user = sales_user
+                      and t.cus_model in
+                          (select SALE_MODEL
+                             from data_item_v@cidpcrm_to_cidpmd
+                            where large_class = '001'
+                              and ITEM_SIZE = '98')),
+                   0) qty98,
+               nvl((select sum(t.act_shp_qty)
+                     from oms_do_lines t
+                    where t.trx_date >=
+                          (select trunc(add_months(last_day(sysdate), -1)) + 1
+                             from dual)
+                      and t.trx_date <=
+                          (select last_day(add_months(sysdate, 0)) from dual)
+                      and t.sales_user = sales_user
+                      and t.cus_model = 'SD02'),
+                   0) qtySD02,
+
+               nvl((select sum(t.act_shp_qty)
+                     from oms_do_lines t
+                    where t.trx_date >=
+                          (select trunc(add_months(last_day(sysdate), -1)) + 1
+                             from dual)
+                      and t.trx_date <=
+                          (select last_day(add_months(sysdate, 0)) from dual)
+                      and t.sales_user = sales_user
+                      and t.cus_model = 'SS03'),
+                   0) qtySS03,
+               nvl((select sum(t.act_shp_qty)
+                     from oms_do_lines t
+                    where t.trx_date >=
+                          (select trunc(add_months(last_day(sysdate), -1)) + 1
+                             from dual)
+                      and t.trx_date <=
+                          (select last_day(add_months(sysdate, 0)) from dual)
+                      and t.sales_user = sales_user
+                      and t.cus_model = 'SS03A'),
+                   0) qtySS03A,
+               nvl((select sum(t.act_shp_qty)
+                     from oms_do_lines t
+                    where t.trx_date >=
+                          (select trunc(add_months(last_day(sysdate), -1)) + 1
+                             from dual)
+                      and t.trx_date <=
+                          (select last_day(add_months(sysdate, 0)) from dual)
+                      and t.sales_user = sales_user
+                      and t.cus_model = 'SS05'),
+                   0) qtySS05,
+               nvl((select sum(t.act_shp_qty)
+                     from oms_do_lines t
+                    where t.trx_date >=
+                          (select trunc(add_months(last_day(sysdate), -1)) + 1
+                             from dual)
+                      and t.trx_date <=
+                          (select last_day(add_months(sysdate, 0)) from dual)
+                      and t.sales_user = sales_user
+                      and t.cus_model = 'SC03'),
+                   0) qtySC03,
+               nvl((select sum(t.act_shp_qty)
+                     from oms_do_lines t
+                    where t.trx_date >=
+                          (select trunc(add_months(last_day(sysdate), -1)) + 1
+                             from dual)
+                      and t.trx_date <=
+                          (select last_day(add_months(sysdate, 0)) from dual)
+                      and t.sales_user = sales_user
+                      and t.cus_model = 'SD11'),
+                   0) qtySD11,
+               nvl((select sum(t.act_shp_qty)
+                     from oms_do_lines t
+                    where t.trx_date >=
+                          (select trunc(add_months(last_day(sysdate), -1)) + 1
+                             from dual)
+                      and t.trx_date <=
+                          (select last_day(add_months(sysdate, 0)) from dual)
+                      and t.sales_user = sales_user
+                      and t.cus_model = 'SD13'),
+                   0) qtySD13,
+               nvl((select sum(t.act_shp_qty)
+                     from oms_do_lines t
+                    where t.trx_date >=
+                          (select trunc(add_months(last_day(sysdate), -1)) + 1
+                             from dual)
+                      and t.trx_date <=
+                          (select last_day(add_months(sysdate, 0)) from dual)
+                      and t.sales_user = sales_user
+                      and t.cus_model = 'SM01'),
+                   0) qtySM01,
+               nvl((select sum(t.act_shp_qty)
+                     from oms_do_lines t
+                    where t.trx_date >=
+                          (select trunc(add_months(last_day(sysdate), -1)) + 1
+                             from dual)
+                      and t.trx_date <=
+                          (select last_day(add_months(sysdate, 0)) from dual)
+                      and t.sales_user = sales_user
+                      and t.cus_model = 'SL01'),
+                   0) qtySL01,
+               nvl((select sum(t.act_shp_qty)
+                     from oms_do_lines t
+                    where t.trx_date >=
+                          (select trunc(add_months(last_day(sysdate), -1)) + 1
+                             from dual)
+                      and t.trx_date <=
+                          (select last_day(add_months(sysdate, 0)) from dual)
+                      and t.sales_user = sales_user
+                      and t.cus_model = 'SP05'),
+                   0) qtySP05,
+               nvl((select sum(t.act_shp_qty)
+                     from oms_do_lines t
+                    where t.trx_date >=
+                          (select trunc(add_months(last_day(sysdate), -1)) + 1
+                             from dual)
+                      and t.trx_date <=
+                          (select last_day(add_months(sysdate, 0)) from dual)
+                      and t.sales_user = sales_user
+                      and t.cus_model = 'SC03'),
+                   0) qtySC03,
+               nvl((select sum(t.act_shp_qty)
+                     from oms_do_lines t
+                    where t.trx_date >=
+                          (select trunc(add_months(last_day(sysdate), -1)) + 1
+                             from dual)
+                      and t.trx_date <=
+                          (select last_day(add_months(sysdate, 0)) from dual)
+                      and t.sales_user = sales_user
+                      and t.cus_model = 'SC05 '),
+                   0) qtySC05,
+               nvl((select sum(t.act_shp_qty)
+                     from oms_do_lines t
+                    where t.trx_date >=
+                          (select trunc(add_months(last_day(sysdate), -1)) + 1
+                             from dual)
+                      and t.trx_date <=
+                          (select last_day(add_months(sysdate, 0)) from dual)
+                      and t.sales_user = sales_user
+                      and t.cus_model = 'ST01'),
+                   0) qtyST01,
+
+               nvl((select sum(t.act_shp_qty)
+                     from oms_do_lines t
+                    where t.trx_date >=
+                          (select trunc(add_months(last_day(sysdate), -1)) + 1
+                             from dual)
+                      and t.trx_date <=
+                          (select last_day(add_months(sysdate, 0)) from dual)
+                      and t.sales_user = sales_user
+                      and t.cus_model = 'SM02'),
+                   0) qtySM02,
+
+               nvl((select sum(t.act_shp_qty)
+                     from oms_do_lines t
+                    where t.trx_date >=
+                          (select trunc(add_months(last_day(sysdate), -1)) + 1
+                             from dual)
+                      and t.trx_date <=
+                          (select last_day(add_months(sysdate, 0)) from dual)
+                      and t.sales_user = sales_user
+                      and t.cus_model = 'SW20'),
+                   0) qtySW20,
+
+               nvl((select sum(t.act_shp_qty)
+                     from oms_do_lines t
+                    where t.trx_date >=
+                          (select trunc(add_months(last_day(sysdate), -1)) + 1
+                             from dual)
+                      and t.trx_date <=
+                          (select last_day(add_months(sysdate, 0)) from dual)
+                      and t.sales_user = sales_user
+                      and t.cus_model = 'SW21'),
+                   0) qtySW21,
+               nvl((select sum(t.act_shp_qty)
+                     from oms_do_lines t
+                    where t.trx_date >=
+                          (select trunc(add_months(last_day(sysdate), -1)) + 1
+                             from dual)
+                      and t.trx_date <=
+                          (select last_day(add_months(sysdate, 0)) from dual)
+                      and t.sales_user = sales_user
+                      and t.cus_model = 'SC13'),
+                   0) qtySC13,
+               nvl((select sum(t.act_shp_qty)
+                     from oms_do_lines t
+                    where t.trx_date >=
+                          (select trunc(add_months(last_day(sysdate), -1)) + 1
+                             from dual)
+                      and t.trx_date <=
+                          (select last_day(add_months(sysdate, 0)) from dual)
+                      and t.sales_user = sales_user
+                      and t.cus_model = 'MT15'),
+                   0) qtyMT15,
+               nvl((select sum(t.act_shp_qty)
+                     from oms_do_lines t
+                    where t.trx_date >=
+                          (select trunc(add_months(last_day(sysdate), -1)) + 1
+                             from dual)
+                      and t.trx_date <=
+                          (select last_day(add_months(sysdate, 0)) from dual)
+                      and t.sales_user = sales_user
+                      and t.cus_model = 'MT21'),
+                   0) qtyMT21
+
+          from (select substr(p1.prj_line_name_all,
+                              instr(p1.prj_line_name_all, '_', 1, 6) + 1,
+                              instr(p1.prj_line_name_all, '_', 1, 6) -
+                              instr(p1.prj_line_name_all, '_', 1, 5)) as productModel,
+                       p1.*
+                  from prj_forecast_lines p1) t1
+         inner join prj_forecast_header t2
+            on t1.prj_forecast_header_id = t2.prj_forecast_header_id
+         group by sales_user)
