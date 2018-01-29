@@ -23,9 +23,13 @@ import static java.util.concurrent.Executors.newCachedThreadPool;
 
 public class CheckingMails {
     static ExecutorService executorService = newCachedThreadPool();
-    static String host = "pop.mail.ru";// change accordingly
+//    static String host = "imap.mail.ru";// change accordingly
+    static String host = "pop.mail.ru";
     static String mailStoreType = "pop3";
+//static String mailStoreType = "imap";
+
     static AtomicInteger fail = new AtomicInteger(0);
+
     static AtomicInteger success = new AtomicInteger(0);
 
     public static void check(String host, String storeType, String user,
@@ -33,9 +37,9 @@ public class CheckingMails {
         Properties properties = new Properties();
         properties.put("mail.pop3s.host", host);
         properties.put("mail.pop3s.port", "995");
-       properties.put("mail.pop3s.starttls.enable", "true");
+        properties.put("mail.pop3.auth","false");
+//       properties.put("mail.pop3s.starttls.enable", "true");
         try {
-            // Setup authentication, get session
             Session emailSession = Session.getInstance(properties,
                     new javax.mail.Authenticator() {
                         @Override
@@ -45,26 +49,26 @@ public class CheckingMails {
                         }
                     });
             Store store = emailSession.getStore("pop3s");
-
+//            Store store = emailSession.getStore("imap");
 
             store.connect();
 
 
             // create the folder object and open it
-            Folder emailFolder = store.getFolder("INBOX");
-            emailFolder.open(Folder.READ_ONLY);
+//            Folder emailFolder = store.getFolder("INBOX");
+//            emailFolder.open(Folder.READ_ONLY);
 
             // retrieve the messages from the folder in an array and print it
-            Message[] messages = emailFolder.getMessages();
+//            Message[] messages = emailFolder.getMessages();
             //这这里说明邮箱验证成功
             //    System.out.println(user + " is Ok");
             success.incrementAndGet();
             System.out.println(user +"------"+password+   " is OK");
             // close the store and folder objects
-            emailFolder.close(false);
+//            emailFolder.close(false);
             store.close();
         } catch (Exception e) {
-            System.out.println(user + " is Fail");
+            System.out.println(user +"------"+password+ " is Fail");
 //            e.printStackTrace();
             fail.incrementAndGet();
         }
@@ -79,6 +83,7 @@ public class CheckingMails {
     public static void emailCheck(List<Eamil> email) throws InterruptedException {
         CountDownLatch countDownLatch = new CountDownLatch(email.size());
         for (Eamil item : email) {
+        Thread.sleep(200);
             executorService.submit(new Runnable() {
                 @Override
                 public void run() {
@@ -119,5 +124,7 @@ public class CheckingMails {
         System.out.println("总数为" + num);
         return list;
     }
+
+
 
 }
